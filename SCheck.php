@@ -1,7 +1,9 @@
-<html>
+html>
 <head>
+<link rel=stylesheet type="text/css"
+href="style.css"
 <meta charset=utf-8">
-<title>SCheck</title>
+<title>Problem1</title>
 </head>
 <body>
 
@@ -20,7 +22,7 @@
 
 <hr>
 
-<div style="padding:20px; text-align:center;">
+<div class="checkedtextdiv">
 <?php 
 
 $i=0; //error counter
@@ -41,6 +43,16 @@ $str=explode("\r\n",$text); //split whole text into strings
 		$words=explode(" ",$value);	//split string into words
 		foreach( $words as $k =>$v) //for each word in the string
 		{
+			
+			if ((($v==mb_strtolower($words[$k+1])) or ($v==mb_strtolower(trim($words[$k+1],"!@#$%^&*)(_+-=№;:?/\|<>,.")))) && $v!=NULL) //if words are the same
+			{
+			$col=stripos( $value , $v );
+			$err[$i]="$i Repetition of the word '$v' at ($key;$col)"; //add to error array
+			$i++;
+			echo "<font class='error'><b>$v </b></font>";
+			}
+			else
+			{ 
 			foreach( $rules as $v1)
 			{
 				if (strpos($v,$v1)!=null)
@@ -48,25 +60,19 @@ $str=explode("\r\n",$text); //split whole text into strings
 					$col=stripos( $value , $v );
 					$err[$i]="$i Warning: '$v1' at ($key;$col)";
 					$i++;
-					echo "<font color=orange><b>$v </b> </font>";
 					$warn=true;
 				}
-				 
+				
 				 			
 			}
-			if ((($v==mb_strtolower($words[$k+1])) or ($v==mb_strtolower(trim($words[$k+1],"!@#$%^&*)(_+-=№;:?/\|<>,.")))) && $v!=NULL) //if words are the same
+			if ($warn==true)
 			{
-			$col=stripos( $value , $v );
-			$err[$i]="$i Repetition of the word '$v' at ($key;$col)"; //add to error array
-			$i++;
-			echo "<font color=red><b>$v </b></font>";
-			}
-			else if ($warn!=true)
-				{
-				echo "<font>$v </font>";
+				echo "<font class='warn'><b>$v </b> </font>";
 				$warn=false;
-				}
+			}
+			else echo "<font class='normal'>$v </font>";
 				
+			}			
 			
 			
 	
