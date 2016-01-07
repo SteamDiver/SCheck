@@ -73,13 +73,6 @@ $str=explode("\r\n",$text); //split whole text into strings
 			else echo "<font class='normal'>$v </font>";
 				
 			}			
-			
-			
-	
-		
-			
-			
-		
 		}
 	echo "<br>";	
 	}
