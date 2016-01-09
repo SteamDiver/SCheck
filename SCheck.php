@@ -1,4 +1,4 @@
-html>
+<html>
 <head>
 <link rel=stylesheet type="text/css"
 href="style.css"
@@ -35,6 +35,7 @@ $rules= array(
 
 //------------------------------------------------------------------
 $text=$_POST["text"];
+//$text=mb_strtolower($text);
 $text=htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 $str=explode("\r\n",$text); //split whole text into strings
 	foreach ($str as $key => $value)  //for each string
@@ -44,7 +45,7 @@ $str=explode("\r\n",$text); //split whole text into strings
 		foreach( $words as $k =>$v) //for each word in the string
 		{
 			
-			if ((($v==mb_strtolower($words[$k+1])) or ($v==mb_strtolower(trim($words[$k+1],"!@#$%^&*)(_+-=№;:?/\|<>,.")))) && $v!=NULL) //if words are the same
+			if (((mb_strtolower($v)==mb_strtolower($words[$k+1])) || (mb_strtolower($v)==mb_strtolower(trim($words[$k+1],"!@#$%^&*)(_+-=№;:?/\|<>,.")))) && ($v!=NULL)) //if words are the same
 			{
 			$col=stripos( $value , $v );
 			$err[$i]="$i Repetition of the word '$v' at ($key;$col)"; //add to error array
@@ -55,7 +56,7 @@ $str=explode("\r\n",$text); //split whole text into strings
 			{ 
 			foreach( $rules as $v1)
 			{
-				if (strpos($v,$v1)!=null)
+				if (($v1!=null) && (strstr($v,$v1)!=null) )
 				{
 					$col=stripos( $value , $v );
 					$err[$i]="$i Warning: '$v1' at ($key;$col)";
@@ -73,6 +74,13 @@ $str=explode("\r\n",$text); //split whole text into strings
 			else echo "<font class='normal'>$v </font>";
 				
 			}			
+			
+			
+	
+		
+			
+			
+		
 		}
 	echo "<br>";	
 	}
@@ -85,9 +93,13 @@ $str=explode("\r\n",$text); //split whole text into strings
 		foreach ($err as $v1) echo "$v1 \n" ;
 		} 
 		
-		else echo "No_errors"?>
+		else 
+		
+			echo "No_errors";?>
+			
+		
+		
 </textarea>
 </div>
-
 </body>
 </html>
