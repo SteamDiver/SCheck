@@ -1,5 +1,5 @@
 # SCheck PRE-ALPHA
-SCheck - web application designed for searching typos.
+SCheck - web application designed for searching typos in the text.
 # INSTALLATION
 To install SCheck you just need to copy 'SCheck.php' and 'style.css' into your project folder.
 #REQUIREMENTS
