@@ -5,5 +5,5 @@ SCheck doesn't require any specific installation. You just need to copy 'SCheck.
 #REQUIREMENTS
 1) Web application requires PHP 5.3.13 or above.
 
-2) To process large text you may need to increase the parametr 'post_max_size' in your 'php.ini'.
+2) To process large text you may need to increase parameters 'post_max_size' and 'max_execution_time' in your 'php.ini'.
 
