@@ -19,8 +19,12 @@
     <?php include_once("SCheck.php"); ?>
     <form name="err_form" accept-charset="utf-8" method="POST" action="SCheck.php">
         <textarea name="err" id="err" cols="100" rows="10" title="Error list"><?php
-            foreach($err as $error){
-                echo "$error";
+            if (!empty($err)) {
+                foreach ($err as $error) {
+                    echo "$error";
+                }
+            } else {
+                echo "No errors";
             }
             ?></textarea>
         <br>
