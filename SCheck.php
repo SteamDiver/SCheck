@@ -1,14 +1,4 @@
-<html>
-<head>
-    <link rel=stylesheet type="text/css"
-          href="style.css">
-    <meta charset=utf-8">
-    <title>SCheck</title>
-</head>
-<body>
-
-<div class="checkedtextdiv">
-    <?php
+<?php
 
 
     $i = 0; //error counter
@@ -46,37 +36,5 @@
                 } else $output .= "<span class='normal'>$v </span>";
             }
         }
-        echo "<br>";
+        $output .="<br>";
     }
-    ?>
-
-    <!----------------input------------------------------------------------------------>
-    <div align=center>
-        <h2>Enter your text into the form</h2>
-        <form name="form" accept-charset="utf-8" method="POST" action="SCheck.php">
-        <textarea wrap="hard" id="text" name="text" cols="150" rows="20"
-                  title="Enter your text here"><? echo($_POST["text"]) ?></textarea>
-            <br>
-            <input type=submit value="Check">
-            <INPUT class="btn" value="Clear" type="submit" onclick="document.getElementById('text').value='';"/>
-        </form>
-        <form name="err_form" accept-charset="utf-8" method="POST" action="SCheck.php">
-
-            <br>
-    </div>
-    <hr>
-
-    <!----------output---------------------------------------------------------------->
-    <br>
-    <textarea name="err" id="err" cols="100" rows="10" title="Error list"><?php
-        if (!empty($err)) {
-        } else echo "No_errors";
-        ?>
-    </textarea>
-    <br>
-    <? if (!empty($output)) {
-        echo $output;
-    } ?>
-</div>
-</body>
-</html>
