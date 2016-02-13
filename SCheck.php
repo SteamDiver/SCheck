@@ -51,7 +51,6 @@ class Scheck
             }
             $this->output .= "<br>";
         }
-//        return array($output, $err);
     }
 
     function get_output()
