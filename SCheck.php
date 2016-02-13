@@ -9,7 +9,6 @@ function Check($text)
     $rules = file("rules.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
     //------------------------------------------------------------------
-//        $text = $_POST["text"];
     $text = htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     $str = explode("\r\n", $text); //split whole text into strings
     foreach ($str as $key => $value)  //for each string

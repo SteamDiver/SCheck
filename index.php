@@ -30,10 +30,6 @@ $tmp=Check($_POST["text"]);
 <hr>
 <div class="checkedtextdiv">
     <?php
-//    if (!empty($output)) {
-    //        echo($output);
-    //    }
-    //
      echo $tmp[0] ;
     ?>
 </div>
