@@ -9,7 +9,7 @@
     <?php
     include_once("SCheck.php");
     $o = new Scheck($_POST["text"]);
-    $tmp = $o->Check();
+    $o->Check();
     ?>
     <h2>Enter your text into the form</h2>
     <form name="form" accept-charset="utf-8" method="POST" action="index.php">
@@ -23,8 +23,9 @@
 
     <form name="err_form" accept-charset="utf-8" method="POST" action="SCheck.php">
         <textarea name="err" id="err" rows="10" title="Error list"><?php
-            if (!empty($tmp[1])) {
-                foreach ($tmp[1] as $error) {
+            $tmp=$o->get_errors();
+            if (!empty($tmp)) {
+                foreach ($tmp as $error) {
                     echo "$error";
                 }
             } else {
@@ -38,7 +39,7 @@
 <hr>
 <div class="checkedtextdiv">
     <?php
-    echo $tmp[0];
+    echo $o->get_output();
     ?>
 </div>
 </body>
