@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <div align="center">
     <?php include_once("SCheck.php");
-$tmp=Check($_POST["text"]);
+    $tmp = Check($_POST["text"]);
     ?>
     <h2>Enter your text into the form</h2>
     <form name="form" accept-charset="utf-8" method="POST" action="index.php"><textarea
@@ -30,6 +30,6 @@ $tmp=Check($_POST["text"]);
 <hr>
 <div class="checkedtextdiv">
     <?php
-     echo $tmp[0] ;
+    echo $tmp[0];
     ?>
 </div>
