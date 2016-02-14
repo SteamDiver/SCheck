@@ -88,10 +88,10 @@ class Scheck
                 $this->output .= "<span class='error'><b>$value </b></span>";
                 break;
             case "warn":
-                $this->output .= "<span class='warn'><b>$value</b> </span>";
+                $this->output .= "<span class='warn'><b>$value </b> </span>";
                 break;
             default:
-                $this->output .= "<span class='normal'>$value</span>";
+                $this->output .= "<span class='normal'>$value </span>";
         }
 
 
