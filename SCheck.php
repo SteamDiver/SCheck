@@ -58,7 +58,7 @@ class Scheck
     function set_error($i, $value, $row, $col, $warn)
     {
         if ($warn == true) {
-            $this->err[$i] = "$i Warning: '$value' at ($row;$col)";
+            $this->err[$i] = "$i Warning: '$value' at ($row;$col)\n";
         } else {
             $this->err[$i] = "$i Repetition of the word '$value' at ($row;$col)\n";
         }
