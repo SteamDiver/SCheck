@@ -1,1 +1,2 @@
-"Full_Path\php.exe" Scheck_console.php "text" pause
+Full_Path\php.exe Scheck_console.php "text"
+pause
