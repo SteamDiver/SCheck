@@ -26,10 +26,8 @@
             $tmp=$o->get_errors();
             if (!empty($tmp)) {
                 foreach ($tmp as $error) {
-                    echo "$error";
+                    echo $error;
                 }
-            } else {
-                echo "No errors";
             }
             ?>
         </textarea>
