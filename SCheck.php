@@ -38,6 +38,9 @@ class Scheck
             }
             $this->output .= "<br>";
         }
+        if($this->err==NULL){
+            $this->err[0]="No errors";
+        }
     }
 
     function get_output()
