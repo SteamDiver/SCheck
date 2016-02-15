@@ -67,7 +67,7 @@ class Scheck
 
     function check_rules($rules, $string_key, $string, $word, $i)
     {
-        $type="";
+        $type = "";
         foreach ($rules as $v1) {
             if (($v1 != null) && (strstr($word, $v1) != null)) {
                 $col = stripos($string, $word);
