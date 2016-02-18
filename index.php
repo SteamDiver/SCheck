@@ -7,9 +7,9 @@
 <body>
 <div class="text-div">
     <?php
-    include_once("SCheck.php");
-    $o = new Scheck($_POST["text"]);
-    $o->Check();
+    include_once("Checker.php");
+    $o = new Checker($_POST["text"],"WebFormatter");
+    $o->checker();
     ?>
     <h2>Enter your text into the form</h2>
     <form name="form" accept-charset="utf-8" method="POST" action="index.php">
@@ -23,12 +23,8 @@
 
     <form name="err_form" accept-charset="utf-8" method="POST" action="SCheck.php">
         <textarea name="err" id="err" rows="10" title="Error list"><?php
-            $tmp=$o->get_errors();
-            if (!empty($tmp)) {
-                foreach ($tmp as $error) {
-                    echo $error;
-                }
-            }
+            echo
+            $o->get_formatted();
             ?>
         </textarea>
     </form>
