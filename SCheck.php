@@ -10,7 +10,7 @@ class Scheck
         $this->text = $text;
     }
 
-    function Check()
+    function check()
     {
 
         $i = 0; //error counter
@@ -38,17 +38,17 @@ class Scheck
             }
             $this->output .= "<br>";
         }
-        if($this->err==NULL){
-            $this->err[0]="No errors";
+        if ($this->err == NULL) {
+            $this->err[0] = "No errors";
         }
     }
 
-    function get_output()
+    public function get_output()
     {
         return $this->output;
     }
 
-    function get_errors()
+    public function get_errors()
     {
         return $this->err;
     }
