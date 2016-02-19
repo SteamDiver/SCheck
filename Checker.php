@@ -1,45 +1,37 @@
 <?php
-include_once "SCheck.php";
+function __autoload($class_name)
+{
+    include $class_name.".php";
+}
 class Checker extends Scheck
 {
-    private $formatter;
 
+    private $formatter;
 
     function __construct($text, $formatter)
     {
         parent::__construct($text);
         $this->formatter = $formatter;
-        require_once "$formatter.php";
     }
-
-    function checker()
-    {
-        switch ($this->formatter) {
-            case "WebFormatter":
-                $this->Check();
-                break;
-            case "ConsoleFormatter":
-                $obj=new Checker($argv[1],$argv[2]);
-                $obj->checker();
-                $obj->get_formatted();
-                print_r("dsgsg");
-        }
-    }
-
     function get_formatted()
     {
         switch ($this->formatter) {
-            case "WebFormatter":
+            case new WebFormatter():
                 $web = new WebFormatter($this->get_errors());
-                $web->WriteToWeb();
+                $web->WriteToWeb($this->get_errors());
                 break;
-            case "ConsoleFormatter":
+            case new ConsoleFormatter():
                 $console = new ConsoleFormatter($this->get_errors());
-                $console->WriteToConsole();
+                $console->WriteToConsole($this->get_errors());
+                break;
         }
     }
 
 }
+$checker = new Checker($argv[1], new ConsoleFormatter());
+$checker->check();
+$checker->get_formatted();
+
 
 
 

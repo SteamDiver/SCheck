@@ -1,16 +1,12 @@
 <?php
 class WebFormatter
 {
-    function __construct($errors)
+    public function WriteToWeb($errors)
     {
-        $this->errors=$errors;
-    }
-
-    public function WriteToWeb()
-    {
-        foreach ($this->errors as $value) {
+        foreach ($errors as $value) {
             echo($value);
         }
+
     }
 }
 

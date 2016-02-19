@@ -1,19 +1,15 @@
 <?php
 class ConsoleFormatter
 {
-    function __construct($errors)
-    {
-        $this->errors=$errors;
-    }
-
-    function WriteToConsole()
+    function WriteToConsole($errors)
     {
         print_r("\n");
-        foreach ($this->errors as $value) {
+        foreach ($errors as $value) {
             print_r($value);
         }
     }
 }
+
 
 
 
