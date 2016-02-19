@@ -8,8 +8,8 @@
 <div class="text-div">
     <?php
     include_once("Checker.php");
-    $o = new Checker($_POST["text"],"WebFormatter");
-    $o->checker();
+    $o = new Checker($_POST["text"],new WebFormatter());
+    $o->check();
     ?>
     <h2>Enter your text into the form</h2>
     <form name="form" accept-charset="utf-8" method="POST" action="index.php">
