@@ -14,35 +14,29 @@ class Scheck
     {
 
         $i = 0; //error counter
+        $this->text = str_replace(array("\r\n", "\r", "\n"), ' ', $this->text);
 
         $rules = $this->get_rules("rules.txt");
 
         $this->text = htmlspecialchars($this->text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-        $str = explode("\r\n", $this->text); //split whole text into strings
 
-        foreach ($str as $key => $value)  //for each string
-        {
-            $words = explode(" ", $value);    //split string into words
-            foreach ($words as $k => $v) //for each word in the string
-            {
-                if (((mb_strtolower($v) == mb_strtolower($words[$k + 1])) || (mb_strtolower($v) == mb_strtolower(trim($words[$k + 1], "!@#$%^&*)(_+-=№;:?/\|<>,.")))) && ($v != NULL)) //if words are the same
-                {
-                    $col = stripos($value, $v);
-                    $this->set_error($i, $v, $key, $col, false);
-                    $i++;
-                    $this->set_output($v, "error");
-                } else {
-                    $type = $this->check_rules($rules, $key, $value, $v, $i);
-                    $this->set_output($v, $type);
-                }
-            }
-            $this->output .= "<br>";
+        preg_match_all('/(\b\w+\b)\s\1/iu', $this->text, $matches);                           //error checker
+
+        foreach ($matches[0] as $key => $value) {                                             //set error list
+            $this->set_error($i++, $matches[0][$key]);
         }
+
+        $this->check_rules($rules, $this->text, $i);
+
         if ($this->err == NULL) {
             $this->err[0] = "No errors";
         }
     }
 
+    /**
+     * @return string
+     * @deprecated No use due to no use of "set output()"
+     */
     public function get_output()
     {
         return $this->output;
@@ -58,40 +52,42 @@ class Scheck
         return file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     }
 
-    function set_error($i, $value, $row, $col, $warn)
+    function set_error($i, $value)
     {
-        if ($warn == true) {
-            $this->err[$i] = "$i Warning: '$value' at ($row;$col)\n";
-        } else {
-            $this->err[$i] = "$i Repetition of the word '$value' at ($row;$col)\n";
-        }
+
+        $this->err[$i] = "$i Warning: '$value' \n";
+
         return $this->err;
     }
 
-    function check_rules($rules, $string_key, $string, $word, $i)
+    function check_rules($rules, $text, $i)
     {
-        $type = "";
-        foreach ($rules as $v1) {
-            if (($v1 != null) && (strstr($word, $v1) != null)) {
-                $col = stripos($string, $word);
-                $type = "warn";//means there was warning
-                $this->set_error($i, $v1, $string_key, $col, true);
-                $i++;
+        $textarray = explode(" ", $text);
+        foreach ($textarray as $word) {
+            foreach ($rules as $v1) {
+                if (($v1 != null) && (strstr($word, $v1) != null)) {
 
+                    // $type = "warn";//means there was warning
+                    $this->set_error($i++, $v1);
+                    $i++;
+
+                }
             }
         }
-        return $type;
 
     }
 
+
+    /**
+     * @param $value
+     * @param $type
+     * @deprecated No use due to no fuck logic for this function
+     */
     function set_output($value, $type)
     {
         switch ($type) {
             case "error":
                 $this->output .= "<span class='error'><b>$value </b></span>";
-                break;
-            case "warn":
-                $this->output .= "<span class='warn'><b>$value </b> </span>";
                 break;
             default:
                 $this->output .= "<span class='normal'>$value </span>";

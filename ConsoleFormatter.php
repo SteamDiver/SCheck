@@ -1,11 +1,11 @@
 <?php
 class ConsoleFormatter
 {
-    function WriteToConsole($errors)
+    function write($errors)
     {
-        print_r("\n");
+        print ("\n");
         foreach ($errors as $value) {
-            print_r($value);
+            print($value);
         }
     }
 }

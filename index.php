@@ -13,7 +13,7 @@
     ?>
     <h2>Enter your text into the form</h2>
     <form name="form" accept-charset="utf-8" method="POST" action="index.php">
-        <textarea wrap="hard" id="text" name="text" rows="20" cols="10"
+        <textarea  id="text" name="text" rows="20" cols="10"
                   title="Enter your text here"><? echo($_POST["text"]) ?></textarea>
         <br>
         <input type=submit value="Check">
@@ -24,7 +24,7 @@
     <form name="err_form" accept-charset="utf-8" method="POST" action="SCheck.php">
         <textarea name="err" id="err" rows="10" title="Error list"><?php
             echo
-            $o->get_formatted();
+            $o->format();
             ?>
         </textarea>
     </form>
@@ -34,6 +34,7 @@
 <div class="checkedtextdiv">
     <?php
     echo $o->get_output();
+
     ?>
 </div>
 </body>

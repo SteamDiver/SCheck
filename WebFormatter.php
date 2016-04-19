@@ -1,7 +1,7 @@
 <?php
 class WebFormatter
 {
-    public function WriteToWeb($errors)
+    public function write($errors)
     {
         foreach ($errors as $value) {
             echo($value);
