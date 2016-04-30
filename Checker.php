@@ -25,8 +25,8 @@ class Checker extends Scheck implements FormatterInterface
 
 }
 
-$checker = new Checker($argv[1], new ConsoleFormatter());
-$checker->check();
+//$checker = new Checker($argv[1], new ConsoleFormatter());
+//$checker->check();
 
 
 

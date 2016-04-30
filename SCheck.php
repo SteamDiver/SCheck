@@ -4,6 +4,7 @@ class Scheck
 {
     private $output = "";
     private $err;
+    private $i;
 
     function __construct($text)
     {
@@ -13,20 +14,21 @@ class Scheck
     function check()
     {
 
-        $i = 0; //error counter
+        $this->i = 1; //error counter
         $this->text = str_replace(array("\r\n", "\r", "\n"), ' ', $this->text);
-
-        $rules = $this->get_rules("rules.txt");
 
         $this->text = htmlspecialchars($this->text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 
-        preg_match_all('/(\b\w+\b)\s\1/iu', $this->text, $matches);                           //error checker
+        preg_match_all('/(\b\w+\b)\s\1/iu', $this->text, $matches, PREG_OFFSET_CAPTURE);                           //error checker
 
         foreach ($matches[0] as $key => $value) {                                             //set error list
-            $this->set_error($i++, $matches[0][$key]);
+            $this->set_error($this->i++, $matches[0][$key][0], $matches[0][$key][1]);
         }
 
-        $this->check_rules($rules, $this->text, $i);
+        $this->check_rules($this->get_rules("rules.txt"));
+
+
+
 
         if ($this->err == NULL) {
             $this->err[0] = "No errors";
@@ -35,7 +37,7 @@ class Scheck
 
     /**
      * @return string
-     * @deprecated No use due to no use of "set output()"
+     * @deprecated
      */
     public function get_output()
     {
@@ -52,28 +54,27 @@ class Scheck
         return file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     }
 
-    function set_error($i, $value)
+    function set_error($i, $value, $at)
     {
 
-        $this->err[$i] = "$i Warning: '$value' \n";
+        $this->err[$i] = "$i Warning: '$value' at $at\n";
 
         return $this->err;
     }
 
-    function check_rules($rules, $text, $i)
+    function check_rules($rules)
     {
-        $textarray = explode(" ", $text);
-        foreach ($textarray as $word) {
-            foreach ($rules as $v1) {
-                if (($v1 != null) && (strstr($word, $v1) != null)) {
 
-                    // $type = "warn";//means there was warning
-                    $this->set_error($i++, $v1);
-                    $i++;
 
-                }
+        foreach ($rules as $v) {
+
+           preg_match_all('/' . preg_quote($v) . '+/iu', $this->text, $matches, PREG_OFFSET_CAPTURE);
+            foreach ($matches[0] as $key => $value) {                                             //set error list
+                $this->set_error($this->i++, $matches[0][$key][0], $matches[0][$key][1]);
             }
         }
+
+
 
     }
 
@@ -81,7 +82,7 @@ class Scheck
     /**
      * @param $value
      * @param $type
-     * @deprecated No use due to no fuck logic for this function
+     * @deprecated
      */
     function set_output($value, $type)
     {
