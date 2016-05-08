@@ -1,2 +1,2 @@
-Full_Path\php.exe Scheck_console.php "text"
+Full_Path\php.exe Checker.php "text text"
 pause
