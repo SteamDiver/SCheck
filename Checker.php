@@ -15,18 +15,21 @@ class Checker extends Scheck implements FormatterInterface
         $this->formatter = $formatter;
     }
 
+
+    /**
+     *Format with formatter given in SCheck::__construct()
+     */
     function format()
     {
         $obj = new $this->formatter;
         $obj->write($this->get_errors());
-        return null;
     }
 
 
 }
 
-//$checker = new Checker($argv[1], new ConsoleFormatter());
-//$checker->check();
+$checker = new Checker($argv[1], new ConsoleFormatter());
+$checker->check();
 
 
 
