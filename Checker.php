@@ -1,10 +1,10 @@
 <?php
 function __autoload($class_name)
 {
-    include $class_name . ".php";
+    include $class_name . '.php';
 }
 
-class Checker extends Scheck implements FormatterInterface
+class Checker extends SCheck implements FormatterInterface
 {
 
     private $formatter;
@@ -27,9 +27,6 @@ class Checker extends Scheck implements FormatterInterface
 
 
 }
-
-$checker = new Checker($argv[1], new ConsoleFormatter());
-$checker->check();
 
 
 
